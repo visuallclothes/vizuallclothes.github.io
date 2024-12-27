@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,27 +39,13 @@
     </style>
     <script>
         function showSection(sectionId) {
-            // Masquer toutes les sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-            });
-
-            // Afficher uniquement la section demandée
-            const sectionToShow = document.getElementById(sectionId);
-            if (sectionToShow) {
-                sectionToShow.style.display = 'block';
-            }
+            document.querySelectorAll('.section').forEach(section => { section.style.display = 'none'; });
+            document.getElementById(sectionId).style.display = 'block';
         }
-
         function confirmPurchase() {
-            // Masquer toutes les sections d'achat
-            document.querySelectorAll('.form-container').forEach(section => {
-                section.style.display = 'none';
-            });
-
-            // Afficher la confirmation
+            document.querySelectorAll('.form-container').forEach(section => { section.style.display = 'none'; });
             document.getElementById("confirmation").style.display = "block";
-            return false; // Empêche le rechargement de la page
+            return false; // Prevents page reload
         }
     </script>
 </head>
@@ -100,9 +85,9 @@
         </div>
     </section>
 
-    <!-- Formulaire d'achat -->
+    <!-- Page d'Achat pour le Pull -->
     <section id="purchase-pull" class="section form-container">
-        <h2>Finaliser l'achat - Pull</h2>
+        <h2>Finaliser l'Achat - Pull</h2>
         <form onsubmit="return confirmPurchase()">
             <label for="quantity-pull">Quantité :</label>
             <input type="number" id="quantity-pull" name="quantity" min="1" value="1" required>
@@ -113,6 +98,7 @@
                 <option value="L">L</option>
                 <option value="XL">XL</option>
             </select>
+            <!-- Informations personnelles -->
             <label for="name-pull">Nom :</label>
             <input type="text" id="name-pull" name="name" required>
             <label for="surname-pull">Prénom :</label>
@@ -121,6 +107,8 @@
             <input type="email" id="email-pull" name="email" required>
             <label for="phone-pull">Numéro de téléphone :</label>
             <input type="tel" id="phone-pull" name="phone" required>
+            
+            <!-- Informations de paiement -->
             <h4>Informations de Paiement</h4>
             <label for="card-number-pull">Numéro de carte bancaire :</label>
             <input type="text" id="card-number-pull" name="card_number" placeholder="1234 5678 9012 3456" required pattern="\d{4} \d{4} \d{4} \d{4}">
@@ -128,11 +116,161 @@
             <input type="month" id="expiry-date-pull" name="expiry_date" required>
             <label for="cvc-pull">CVC :</label>
             <input type="text" id="cvc-pull" name="cvc" pattern="\d{3}" placeholder="123" required>
+            
             <button type="submit" class="button">Confirmer l'achat</button>
         </form>
+        
+        <h4>Guide des Tailles</h4>
+        <table class="size-guide">
+            <tr>
+                <th>Taille</th>
+                <th>Tour de poitrine (cm)</th>
+            </tr>
+            <tr>
+                <td>S</td>
+                <td>85-90</td>
+            </tr>
+            <tr>
+                <td>M</td>
+                <td>90-95</td>
+            </tr>
+            <tr>
+                <td>L</td>
+                <td>95-100</td>
+            </tr>
+            <tr>
+                <td>XL</td>
+                <td>100-105</td>
+            </tr>
+        </table>
     </section>
 
-    <!-- Confirmation -->
+    <!-- Page d'Achat pour le Jogging -->
+    <section id="purchase-jogging" class="section form-container">
+        <h2>Finaliser l'Achat - Jogging</h2>
+        <form onsubmit="return confirmPurchase()">
+            <label for="quantity-jogging">Quantité :</label>
+            <input type="number" id="quantity-jogging" name="quantity" min="1" value="1" required>
+            <label for="size-jogging">Taille :</label>
+            <select id="size-jogging" name="size" required>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select>
+            <!-- Informations personnelles -->
+            <label for="name-jogging">Nom :</label>
+            <input type="text" id="name-jogging" name="name" required>
+            <label for="surname-jogging">Prénom :</label>
+            <input type="text" id="surname-jogging" name="surname" required>
+            <label for="email-jogging">Email :</label>
+            <input type="email" id="email-jogging" name="email" required>
+            <label for="phone-jogging">Numéro de téléphone :</label>
+            <input type="tel" id="phone-jogging" name="phone" required>
+            
+            <!-- Informations de paiement -->
+            <h4>Informations de Paiement</h4>
+            <label for="card-number-jogging">Numéro de carte bancaire :</label>
+            <input type="text" id="card-number-jogging" name="card_number" placeholder="1234 5678 9012 3456" required pattern="\d{4} \d{4} \d{4} \d{4}">
+            <label for="expiry-date-jogging">Date d'expiration :</label>
+            <input type="month" id="expiry-date-jogging" name="expiry_date" required>
+            <label for="cvc-jogging">CVC :</label>
+            <input type="text" id="cvc-jogging" name="cvc" pattern="\d{3}" placeholder="123" required>
+            
+            <button type="submit" class="button">Confirmer l'achat</button>
+        </form>
+        
+        <h4>Guide des Tailles</h4>
+        <table class="size-guide">
+            <tr>
+                <th>Taille</th>
+                <th>Tour de taille (cm)</th>
+            </tr>
+            <tr>
+                <td>S</td>
+                <td>70-75</td>
+            </tr>
+            <tr>
+                <td>M</td>
+                <td>75-80</td>
+            </tr>
+            <tr>
+                <td>L</td>
+                <td>80-85</td>
+            </tr>
+            <tr>
+                <td>XL</td>
+                <td>85-90</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Page d'Achat pour l'Ensemble -->
+    <section id="purchase-ensemble" class="section form-container">
+        <h2>Finaliser l'Achat - Ensemble</h2>
+        <form onsubmit="return confirmPurchase()">
+            <label for="quantity-ensemble">Quantité :</label>
+            <input type="number" id="quantity-ensemble" name="quantity" min="1" value="1" required>
+            <label for="size-ensemble">Taille :</label>
+            <select id="size-ensemble" name="size" required>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select>
+            <!-- Informations personnelles -->
+            <label for="name-ensemble">Nom :</label>
+            <input type="text" id="name-ensemble" name="name" required>
+            <label for="surname-ensemble">Prénom :</label>
+            <input type="text" id="surname-ensemble" name="surname" required>
+            <label for="email-ensemble">Email :</label>
+            <input type="email" id="email-ensemble" name="email" required>
+            <label for="phone-ensemble">Numéro de téléphone :</label>
+            <input type="tel" id="phone-ensemble" name="phone" required>
+            
+            <!-- Informations de paiement -->
+            <h4>Informations de Paiement</h4>
+            <label for="card-number-ensemble">Numéro de carte bancaire :</label>
+            <input type="text" id="card-number-ensemble" name="card_number" placeholder="1234 5678 9012 3456" required pattern="\d{4} \d{4} \d{4} \d{4}">
+            <label for="expiry-date-ensemble">Date d'expiration :</label>
+            <input type="month" id="expiry-date-ensemble" name="expiry_date" required>
+            <label for="cvc-ensemble">CVC :</label>
+            <input type="text" id="cvc-ensemble" name="cvc" pattern="\d{3}" placeholder="123" required>
+            
+            <button type="submit" class="button">Confirmer l'achat</button>
+        </form>
+        
+        <h4>Guide des Tailles</h4>
+        <table class="size-guide">
+            <tr>
+                <th>Taille</th>
+                <th>Tour de poitrine (cm)</th>
+                <th>Tour de taille (cm)</th>
+            </tr>
+            <tr>
+                <td>S</td>
+                <td>85-90</td>
+                <td>70-75</td>
+            </tr>
+            <tr>
+                <td>M</td>
+                <td>90-95</td>
+                <td>75-80</td>
+            </tr>
+            <tr>
+                <td>L</td>
+                <td>95-100</td>
+                <td>80-85</td>
+            </tr>
+            <tr>
+                <td>XL</td>
+                <td>100-105</td>
+                <td>85-90</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Confirmation de commande -->
     <section id="confirmation" class="section confirmation-message">
         <h2>Merci pour votre achat !</h2>
         <p>Votre commande a bien été enregistrée. Nous vous enverrons une confirmation par email sous peu.</p>
