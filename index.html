@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,7 +8,7 @@
     <style>
         /* Réinitialisation de base */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; text-align: center; }
+        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; text-align: center; min-height: 200vh; }
 
         /* Header */
         header { padding: 20px; background-color: #000000; display: flex; flex-direction: column; align-items: center; }
@@ -19,16 +20,16 @@
 
         /* Section Produits */
         .section { padding: 60px; margin: 20px auto; border: 1px solid #333; display: none; text-align: center; }
-        .product-image { width: 250px; height: auto; margin: 20px 0; cursor: pointer; }
+        .product-image { width: 250px; height: auto; margin: 20px 0; }
         .price { font-size: 1.5em; font-weight: bold; color: #fff; margin: 10px 0; }
 
         /* Button */
         .button-container { display: flex; justify-content: center; }
-        .button { padding: 10px 20px; font-size: 1em; font-weight: bold; color: #000; background-color: #fff; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s; margin-top: 20px; }
+        .button { padding: 10px 20px; font-size: 1em; font-weight: bold; color: #000; background-color: #fff; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
         .button:hover { background-color: #aaa; transform: scale(1.05); }
 
         /* Formulaire d'achat et confirmation */
-        .form-container, .confirmation-container { padding: 20px; margin: 20px auto; max-width: 500px; border: 1px solid #333; background-color: #111; color: #fff; text-align: left; display: none; }
+        .form-container, .confirmation-message { padding: 20px; margin: 20px auto; max-width: 500px; border: 1px solid #333; background-color: #111; color: #fff; text-align: left; display: none; }
         label { display: block; margin: 10px 0 5px; }
         input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="month"], select { width: 100%; padding: 8px; margin-bottom: 10px; background-color: #222; color: #fff; border: 1px solid #555; }
 
@@ -36,44 +37,37 @@
         .size-guide { margin-top: 20px; border-collapse: collapse; width: 100%; }
         .size-guide th, .size-guide td { border: 1px solid #fff; padding: 10px; text-align: center; }
         footer { padding: 10px; text-align: center; background-color: #111; font-size: 0.8em; color: #ccc; }
-
-        /* Styles pour les pages de détails (centrées) */
-        .detail-container {
-            max-width: 600px; /* Limite la largeur maximale */
-            margin: 0 auto; /* Centre horizontalement */
-            padding: 20px;
-        }
-        .detail-container .product-image {
-            max-width: 100%; /* S'assurer que l'image ne dépasse pas la largeur du conteneur */
-            height: auto;
-        }
     </style>
     <script>
-        let isConfirmed = false; // Variable pour suivre l'état de la confirmation
-
         function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => { section.style.display = 'none'; });
-            document.getElementById(sectionId).style.display = 'block';
+            // Masquer toutes les sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
 
-            // Réinitialiser le message de confirmation quand on retourne à la boutique
-            if (sectionId === 'boutique') {
-                document.getElementById("confirmation").style.display = 'none'; // Masquer le message de confirmation
-                isConfirmed = false; // Réinitialiser l'état de confirmation
+            // Afficher uniquement la section demandée
+            const sectionToShow = document.getElementById(sectionId);
+            if (sectionToShow) {
+                sectionToShow.style.display = 'block';
             }
         }
-        
+
         function confirmPurchase() {
-            document.querySelectorAll('.form-container').forEach(section => { section.style.display = 'none'; });
+            // Masquer toutes les sections d'achat
+            document.querySelectorAll('.form-container').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Afficher la confirmation
             document.getElementById("confirmation").style.display = "block";
-            isConfirmed = true; // Met à jour l'état de confirmation
-            return false; // Prevents page reload
+            return false; // Empêche le rechargement de la page
         }
     </script>
 </head>
 <body onload="showSection('boutique')">
     <header>
-        <img src="logo.jpg" alt="Logo Visual" class="logo">
-        <h1>Vizual Store</h1>
+        <img src="IMG_5476.jpg" alt="Logo Visual" class="logo">
+        <h1>Visual Store</h1>
         <nav>
             <ul>
                 <li><a href="#" onclick="showSection('boutique')">Boutique</a></li>
@@ -86,33 +80,30 @@
         <h2>Nos Produits</h2>
         <div id="pulls">
             <h3>Pull</h3>
-            <a href="#" onclick="showSection('view-pull')">
-                <img src="pull vizual.jpg" alt="Pull Vizual" class="product-image">
-            </a>
+            <img src="visual lucas.jpg" alt="Pull Visual" class="product-image">
             <p class="price">50 €</p>
+            <button class="button" onclick="showSection('purchase-pull')">Acheter</button>
         </div>
         <div id="joggings">
             <h3>Jogging</h3>
-            <a href="#" onclick="showSection('view-jogging')">
-                <img src="jogging vizual.jpg" alt="Jogging Vizual" class="product-image">
-            </a>
+            <img src="Visual.jpg" alt="Jogging Visual" class="product-image">
             <p class="price">50 €</p>
+            <button class="button" onclick="showSection('purchase-jogging')">Acheter</button>
         </div>
         <div id="offres">
             <h3>Offre spéciale</h3>
-            <p>Achetez le pull et le jogging pour  <span class="price">90 €</span></p>
-            <a href="#" onclick="showSection('view-ensemble')">
-                <img src="ensemble vizual.jpg" alt="Ensemble jogging Vizual" class="product-image">
-            </a>
+            <p>Achetez le pull et le jogging pour  <span class="price">100 €</span></p>
+            <img src="IMG_5477.jpg" alt="Ensemble jogging Visual" class="product-image">
+            <div class="button-container">
+                <button class="button" onclick="showSection('purchase-ensemble')">Acheter</button>
+            </div>
         </div>
     </section>
 
-    <!-- Page de Vue pour le Pull -->
-    <section id="view-pull" class="section">
-        <div class="detail-container">
-            <h2>Détails du Pull</h2>
-            <img src="pull vizual.jpg" alt="Pull Vizual" class="product-image">
-            <p class="price">50 €</p>
+    <!-- Formulaire d'achat -->
+    <section id="purchase-pull" class="section form-container">
+        <h2>Finaliser l'achat - Pull</h2>
+        <form onsubmit="return confirmPurchase()">
             <label for="quantity-pull">Quantité :</label>
             <input type="number" id="quantity-pull" name="quantity" min="1" value="1" required>
             <label for="size-pull">Taille :</label>
@@ -122,165 +113,34 @@
                 <option value="L">L</option>
                 <option value="XL">XL</option>
             </select>
-            <p><strong>Description :</strong> Un pull confortable en 100% coton, idéal pour l'hiver.</p>
-            <h4>Guide des Tailles</h4>
-            <table class="size-guide">
-                <tr><th>Taille</th><th>Tour de poitrine (cm)</th></tr>
-                <tr><td>S</td><td>85-90</td></tr>
-                <tr><td>M</td><td>90-95</td></tr>
-                <tr><td>L</td><td>95-100</td></tr>
-                <tr><td>XL</td><td>100-105</td></tr>
-            </table>
-            <button class="button" onclick="showSection('purchase-pull')">Finaliser l'Achat</button>
-        </div>
-    </section>
-
-    <!-- Page de Vue pour le Jogging -->
-    <section id="view-jogging" class="section">
-        <div class="detail-container">
-            <h2>Détails du Jogging</h2>
-            <img src="jogging vizual.jpg" alt="Jogging Vizual" class="product-image">
-            <p class="price">50 €</p>
-            <label for="quantity-jogging">Quantité :</label>
-            <input type="number" id="quantity-jogging" name="quantity" min="1" value="1" required>
-            <label for="size-jogging">Taille :</label>
-            <select id="size-jogging" name="size" required>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-            </select>
-            <p><strong>Description :</strong> Un jogging léger et confortable, parfait pour le sport.</p>
-            <h4>Guide des Tailles</h4>
-            <table class="size-guide">
-                <tr><th>Taille</th><th>Tour de taille (cm)</th></tr>
-                <tr><td>S</td><td>70-75</td></tr>
-                <tr><td>M</td><td>75-80</td></tr>
-                <tr><td>L</td><td>80-85</td></tr>
-                <tr><td>XL</td><td>85-90</td></tr>
-            </table>
-            <button class="button" onclick="showSection('purchase-jogging')">Finaliser l'Achat</button>
-        </div>
-    </section>
-
-    <!-- Page de Vue pour l'Ensemble -->
-    <section id="view-ensemble" class="section">
-        <div class="detail-container">
-            <h2>Détails de l'Ensemble</h2>
-            <img src="ensemble vizual.jpg" alt="Ensemble Vizual" class="product-image">
-            <p class="price">90 €</p>
-            <label for="quantity-ensemble">Quantité :</label>
-            <input type="number" id="quantity-ensemble" name="quantity" min="1" value="1" required>
-            <label for="size-ensemble">Taille :</label>
-            <select id="size-ensemble" name="size" required>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-            </select>
-            <p><strong>Description :</strong> L'ensemble comprend le pull et le jogging, parfait pour un look coordonné.</p>
-            <h4>Guide des Tailles</h4>
-            <table class="size-guide">
-                <tr><th>Taille</th><th>Tour de poitrine (cm)</th><th>Tour de taille (cm)</th></tr>
-                <tr><td>S</td><td>85-90</td><td>70-75</td></tr>
-                <tr><td>M</td><td>90-95</td><td>75-80</td></tr>
-                <tr><td>L</td><td>95-100</td><td>80-85</td></tr>
-                <tr><td>XL</td><td>100-105</td><td>85-90</td></tr>
-            </table>
-            <button class="button" onclick="showSection('purchase-ensemble')">Finaliser l'Achat</button>
-        </div>
-    </section>
-
-    <!-- Formulaire de Finalisation d'Achat pour le Pull -->
-    <section id="purchase-pull" class="form-container">
-        <h2>Finaliser l'Achat du Pull</h2>
-        <form onsubmit="return confirmPurchase();">
             <label for="name-pull">Nom :</label>
             <input type="text" id="name-pull" name="name" required>
+            <label for="surname-pull">Prénom :</label>
+            <input type="text" id="surname-pull" name="surname" required>
             <label for="email-pull">Email :</label>
             <input type="email" id="email-pull" name="email" required>
-            <label for="phone-pull">Téléphone :</label>
+            <label for="phone-pull">Numéro de téléphone :</label>
             <input type="tel" id="phone-pull" name="phone" required>
-            <label for="address-pull">Adresse :</label>
-            <input type="text" id="address-pull" name="address" required>
-            <label for="postal-pull">Code Postal :</label>
-            <input type="number" id="postal-pull" name="postal" required>
-            <label for="city-pull">Ville :</label>
-            <input type="text" id="city-pull" name="city" required>
-            <label for="card-number-pull">Numéro de Carte :</label>
-            <input type="number" id="card-number-pull" name="card-number" required>
-            <label for="expiry-date-pull">Date d'Expiration :</label>
-            <input type="month" id="expiry-date-pull" name="expiry-date" required>
-            <label for="cvv-pull">Code de Sécurité :</label>
-            <input type="number" id="cvv-pull" name="cvv" required>
-            <button class="button" type="submit">Confirmer l'Achat</button>
+            <h4>Informations de Paiement</h4>
+            <label for="card-number-pull">Numéro de carte bancaire :</label>
+            <input type="text" id="card-number-pull" name="card_number" placeholder="1234 5678 9012 3456" required pattern="\d{4} \d{4} \d{4} \d{4}">
+            <label for="expiry-date-pull">Date d'expiration :</label>
+            <input type="month" id="expiry-date-pull" name="expiry_date" required>
+            <label for="cvc-pull">CVC :</label>
+            <input type="text" id="cvc-pull" name="cvc" pattern="\d{3}" placeholder="123" required>
+            <button type="submit" class="button">Confirmer l'achat</button>
         </form>
     </section>
 
-    <!-- Formulaire de Finalisation d'Achat pour le Jogging -->
-    <section id="purchase-jogging" class="form-container">
-        <h2>Finaliser l'Achat du Jogging</h2>
-        <form onsubmit="return confirmPurchase();">
-            <label for="name-jogging">Nom :</label>
-            <input type="text" id="name-jogging" name="name" required>
-            <label for="email-jogging">Email :</label>
-            <input type="email" id="email-jogging" name="email" required>
-            <label for="phone-jogging">Téléphone :</label>
-            <input type="tel" id="phone-jogging" name="phone" required>
-            <label for="address-jogging">Adresse :</label>
-            <input type="text" id="address-jogging" name="address" required>
-            <label for="postal-jogging">Code Postal :</label>
-            <input type="number" id="postal-jogging" name="postal" required>
-            <label for="city-jogging">Ville :</label>
-            <input type="text" id="city-jogging" name="city" required>
-            <label for="card-number-jogging">Numéro de Carte :</label>
-            <input type="number" id="card-number-jogging" name="card-number" required>
-            <label for="expiry-date-jogging">Date d'Expiration :</label>
-            <input type="month" id="expiry-date-jogging" name="expiry-date" required>
-            <label for="cvv-jogging">Code de Sécurité :</label>
-            <input type="number" id="cvv-jogging" name="cvv" required>
-            <button class="button" type="submit">Confirmer l'Achat</button>
-        </form>
-    </section>
-
-    <!-- Formulaire de Finalisation d'Achat pour l'Ensemble -->
-    <section id="purchase-ensemble" class="form-container">
-        <h2>Finaliser l'Achat de l'Ensemble</h2>
-        <form onsubmit="return confirmPurchase();">
-            <label for="name-ensemble">Nom :</label>
-            <input type="text" id="name-ensemble" name="name" required>
-            <label for="email-ensemble">Email :</label>
-            <input type="email" id="email-ensemble" name="email" required>
-            <label for="phone-ensemble">Téléphone :</label>
-            <input type="tel" id="phone-ensemble" name="phone" required>
-            <label for="address-ensemble">Adresse :</label>
-            <input type="text" id="address-ensemble" name="address" required>
-            <label for="postal-ensemble">Code Postal :</label>
-            <input type="number" id="postal-ensemble" name="postal" required>
-            <label for="city-ensemble">Ville :</label>
-            <input type="text" id="city-ensemble" name="city" required>
-            <label for="card-number-ensemble">Numéro de Carte :</label>
-            <input type="number" id="card-number-ensemble" name="card-number" required>
-            <label for="expiry-date-ensemble">Date d'Expiration :</label>
-            <input type="month" id="expiry-date-ensemble" name="expiry-date" required>
-            <label for="cvv-ensemble">Code de Sécurité :</label>
-            <input type="number" id="cvv-ensemble" name="cvv" required>
-            <button class="button" type="submit">Confirmer l'Achat</button>
-        </form>
-    </section>
-
-    <!-- Message de Confirmation -->
-    <section id="confirmation" class="confirmation-container">
+    <!-- Confirmation -->
+    <section id="confirmation" class="section confirmation-message">
         <h2>Merci pour votre achat !</h2>
-        <p>Votre commande a été confirmée. Nous vous enverrons un email de confirmation.</p>
-        <button class="button" onclick="showSection('boutique')">Retour à la Boutique</button>
+        <p>Votre commande a bien été enregistrée. Nous vous enverrons une confirmation par email sous peu.</p>
+        <button class="button" onclick="showSection('boutique')">Retour à la boutique</button>
     </section>
 
     <footer>
-        <p>© 2024 Vizual Store. Tous droits réservés.</p>
-		
-        <p>Contactez-nous : 09... | Email : <a href="mailto:Visuallclothes@gmail.com" style="color: #fff;">Visuallclothes@gmail.com</a></p>
-    
+        <p>Contactez-nous : 09... | Email : <a href="mailto:Visual.art@gmail.com" style="color: #fff;">Visual.art@gmail.com</a></p>
     </footer>
 </body>
 </html>
